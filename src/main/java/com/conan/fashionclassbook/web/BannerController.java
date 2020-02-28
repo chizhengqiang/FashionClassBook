@@ -2,9 +2,8 @@ package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.exception.FCBException;
-import com.conan.fashionclassbook.pojo.Banner;
 import com.conan.fashionclassbook.service.IBannerService;
-import com.conan.fashionclassbook.vo.req.BannerCreateReq;
+import com.conan.fashionclassbook.vo.req.BannerReq;
 import com.conan.fashionclassbook.vo.resp.BannerResp;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -48,7 +47,7 @@ public class BannerController {
      */
     @PostMapping("/banners")
     @ApiOperation("增加轮播图接口")
-    public ServerResponse<String> createBanner(@RequestBody BannerCreateReq req) throws FCBException {
+    public ServerResponse<String> createBanner(@RequestBody BannerReq req) throws FCBException {
         return bannerService.createBanner(req);
     }
 
@@ -58,7 +57,7 @@ public class BannerController {
      */
     @PutMapping("/banners")
     @ApiOperation("修改轮播图接口")
-    public ServerResponse<String> editBanner(@RequestBody BannerCreateReq req) throws FCBException {
+    public ServerResponse<String> editBanner(@RequestBody BannerReq req) throws FCBException {
         return bannerService.updateBanner(req);
     }
 

@@ -8,7 +8,7 @@ import java.util.Date;
 public class BannerResp {
 
     private Long id;
-    private String name;
+    private String title;
     private String url;
     private String desc;
     private Integer status;

@@ -7,7 +7,7 @@ import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Banner;
 import com.conan.fashionclassbook.service.IBannerService;
-import com.conan.fashionclassbook.vo.req.BannerCreateReq;
+import com.conan.fashionclassbook.vo.req.BannerReq;
 import com.conan.fashionclassbook.vo.resp.BannerResp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -70,7 +70,7 @@ public class BannerServiceImpl implements IBannerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> createBanner(BannerCreateReq request) throws FCBException {
+    public ServerResponse<String> createBanner(BannerReq request) throws FCBException {
         if (!request.createValidate()) {
             throw new FCBException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
@@ -90,7 +90,7 @@ public class BannerServiceImpl implements IBannerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> updateBanner(BannerCreateReq req) throws FCBException {
+    public ServerResponse<String> updateBanner(BannerReq req) throws FCBException {
         if (!req.updateValidate()) {
             throw new FCBException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }

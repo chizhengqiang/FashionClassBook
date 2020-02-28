@@ -2,7 +2,7 @@ package com.conan.fashionclassbook.service;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.exception.FCBException;
-import com.conan.fashionclassbook.vo.req.BannerCreateReq;
+import com.conan.fashionclassbook.vo.req.BannerReq;
 import com.conan.fashionclassbook.vo.resp.BannerResp;
 import com.github.pagehelper.PageInfo;
 
@@ -17,9 +17,9 @@ public interface IBannerService {
 
     public ServerResponse<BannerResp> getById(Long id) throws FCBException;
 
-    ServerResponse<String> createBanner(BannerCreateReq request) throws FCBException;
+    ServerResponse<String> createBanner(BannerReq request) throws FCBException;
 
-    ServerResponse<String> updateBanner(BannerCreateReq req) throws FCBException;
+    ServerResponse<String> updateBanner(BannerReq req) throws FCBException;
 
     ServerResponse<String> deleteOne(Long id) throws FCBException;
 
