@@ -1,8 +1,7 @@
 package com.conan.fashionclassbook.utils;
 
-import com.conan.fashionclassbook.pojo.User;
+import com.conan.fashionclassbook.pojo.Customer;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -25,18 +24,18 @@ public class JWTUtil {
     /**
      * 生成 jwt
      *
-     * @param user
+     * @param customer
      * @return
      */
-    public static String geneJsonWebToken(User user) {
+    public static String geneJsonWebToken(Customer customer) {
 
-        if (user == null || user.getId() == null || StringUtils.isBlank(user.getNickname())) {
+        if (customer == null || customer.getId() == null || StringUtils.isBlank(customer.getNickname())) {
             return null;
         }
 
         String token = Jwts.builder().setSubject(SUBJECT).
-                claim("id", user.getId()).
-                claim("nickname", user.getNickname()).
+                claim("id", customer.getId()).
+                claim("nickname", customer.getNickname()).
                 setIssuedAt(new Date()).
                 setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .signWith(SignatureAlgorithm.HS256, APP_SECRET).compact();

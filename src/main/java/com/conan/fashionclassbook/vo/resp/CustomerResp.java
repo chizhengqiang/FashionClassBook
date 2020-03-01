@@ -1,16 +1,11 @@
-package com.conan.fashionclassbook.pojo;
+package com.conan.fashionclassbook.vo.resp;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
-import lombok.ToString;
 
-import javax.persistence.Id;
 import java.util.Date;
 
 @Data
-@ApiModel("用户实体类")
-@ToString
-public class User {
+public class CustomerResp {
 
     private Integer id;
     private String nickname;
@@ -19,9 +14,6 @@ public class User {
     private String telephone;
     private String uuid;
     private String headImg;
-    private String weChat;
-    private String weibo;
-    private String qq;
     private String email;
     private String school;
     private String clazz;
@@ -31,6 +23,4 @@ public class User {
     private Integer status;
     private Date createTime;
     private Date lastTime;
-
-
 }

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.conan.fashionclassbook.dao.CustomerMapper">
+    <resultMap id="BaseResultMap" type="com.conan.fashionclassbook.pojo.Customer">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="headImg" property="headimg" jdbcType="VARCHAR"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="CHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="signature" property="signature" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="customer">
+        fcb_customer
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, nickname, username, telephone, password, headImg, uuid, email, gender, `type`,
+    status, signature, description, create_time, last_time
+  </sql>
+
+    <insert id="insertSelective" parameterType="com.conan.fashionclassbook.pojo.Customer" >
+        insert into fcb_customer
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="nickname != null" >
+                nickname,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="telephone != null" >
+                telephone,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="headimg != null" >
+                headImg,
+            </if>
+            <if test="uuid != null" >
+                uuid,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="gender != null" >
+                gender,
+            </if>
+            <if test="type != null" >
+                `type`,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="signature != null" >
+                signature,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="lastTime != null" >
+                last_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null" >
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null" >
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="headimg != null" >
+                #{headimg,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null" >
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="signature != null" >
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTime != null" >
+                #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.conan.fashionclassbook.pojo.Customer" >
+        update fcb_customer
+        <set >
+            <if test="nickname != null" >
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null" >
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="headimg != null" >
+                headImg = #{headimg,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null" >
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="type != null" >
+                `type` = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="signature != null" >
+                signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTime != null" >
+                last_time = #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fcb_customer
+    </select>
+
+    <update id="changeStatusById" parameterType="map">
+    update fcb_customer set `status` = #{status} where id = #{id}
+  </update>
+
+    <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `fcb_customer` where status != 9 AND id = #{id}
+    </select>
+
+    <select id="getCountByNickname" parameterType="String" resultType="Integer">
+    select count(*) from `fcb_customer` where nickname = #{nickname}
+  </select>
+
+    <select id="getCountByExistNickname" parameterType="map" resultType="Integer">
+    select count(*) from `fcb_customer` where nickname = #{nickname} AND id != #{id}
+  </select>
+
+    <select id="getCountByTelephone" parameterType="String" resultType="Integer">
+    select count(*) from `fcb_customer` where telephone = #{telephone}
+  </select>
+
+    <select id="getCountByExistTelephone" parameterType="map" resultType="Integer">
+    select count(*) from `fcb_customer` where telephone = #{telephone} AND id != #{id}
+  </select>
+
+    <select id="getUUIDByNickName" parameterType="String" resultType="String">
+    select uuid from `fcb_customer` where nickname = #{nickname}
+  </select>
+
+    <select id="findByNicknameAndPassword" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `fcb_customer` where nickname = #{nickname} AND password = #{password}
+    </select>
+</mapper>

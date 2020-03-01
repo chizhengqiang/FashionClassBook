@@ -1,15 +1,14 @@
 package com.conan.fashionclassbook.web;
 
-import com.conan.fashionclassbook.commons.Const;
 import com.conan.fashionclassbook.commons.ServerResponse;
-import com.conan.fashionclassbook.pojo.User;
-import com.conan.fashionclassbook.service.UserService;
+import com.conan.fashionclassbook.exception.FCBException;
+import com.conan.fashionclassbook.service.ICustomerService;
+import com.conan.fashionclassbook.vo.req.CustomerReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 @CrossOrigin
 @RestController
@@ -17,7 +16,9 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    UserService userService;
+    ICustomerService customerService;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     /**
      * 用户登陆
@@ -28,39 +29,36 @@ public class LoginController {
      */
     @GetMapping("/login")
     @ApiOperation("用户登陆接口")
-    public ServerResponse<User> login(@RequestParam(value = "nickname") String nickname,
-                                      @RequestParam(value = "password") String password,
-                                      HttpSession session) {
-        ServerResponse<User> response = userService.login(nickname, password);
-        if (response.isSuccess()) {
-            session.setAttribute(Const.CURRENT_USER, response.getData());
-        }
+    public ServerResponse<String> login(@RequestParam(value = "nickname") String nickname,
+                                        @RequestParam(value = "password") String password) throws FCBException {
+        ServerResponse<String> response = customerService.login(nickname, password);
         return response;
     }
 
     /**
      * 注册
      *
-     * @param user
+     * @param req
      * @return
      */
     @ApiOperation("用户注册接口")
     @PostMapping("/register")
-    public ServerResponse<String> register(@RequestBody User user) {
-        ServerResponse<String> response = userService.register(user);
+    public ServerResponse<String> register(@RequestBody CustomerReq req) throws FCBException {
+        ServerResponse<String> response = customerService.register(req);
         return response;
     }
 
     /**
      * 退出
      *
-     * @param session
+     * @param token
      * @return
      */
     @GetMapping("/logout")
     @ApiOperation("用户退出接口")
-    public ServerResponse<String> logout(HttpSession session) {
-        session.removeAttribute(Const.CURRENT_USER);
+    public ServerResponse<String> logout(String token) throws FCBException {
+        //清除token
+        redisTemplate.delete(token);
         return ServerResponse.createBySuccessMessage("退出成功");
     }
 }

@@ -20,7 +20,7 @@ public class CategoryReq {
     private Date lastTime;
 
     public void validate(Boolean isExit) throws FCBException {
-        if (!isExit && id == null) {
+        if (isExit && id == null) {
             throw new FCBException(Constants.ErrorMsg.Category.ID_CANNOT_BE_EMPTY);
         }
         if (!isExit && StringUtils.isEmpty(name)) {
