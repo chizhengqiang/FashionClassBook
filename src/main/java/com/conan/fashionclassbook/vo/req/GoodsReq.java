@@ -1,0 +1,71 @@
+package com.conan.fashionclassbook.vo.req;
+
+import com.conan.fashionclassbook.commons.Constants;
+import com.conan.fashionclassbook.enums.StatusEnum;
+import com.conan.fashionclassbook.exception.FCBException;
+import com.conan.fashionclassbook.pojo.Goods;
+import com.github.pagehelper.PageHelper;
+import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Data
+public class GoodsReq {
+
+    private Long id;
+    private String name;
+    private String coverImg;//封面
+    private BigDecimal price;
+    private Double discount; //折扣，例如9.5折
+    private String desc;//介绍
+    private Boolean flag;//是否打折
+    private Integer status;
+    private Date createTime;
+    private Date lastTime;
+
+    /**
+     * @param isEdit true 编辑
+     */
+    public void validate(Boolean isEdit) throws FCBException {
+        if (isEdit && id == null) {
+            throw new FCBException(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
+        }
+        if (!isEdit && (StringUtils.isEmpty(name))) {
+            throw new FCBException(Constants.ErrorMsg.Goods.NAME_CANNOT_BE_EMPTY);
+        }
+        if (!isEdit && StringUtils.isEmpty(coverImg)) {
+            throw new FCBException(Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY);
+        }
+        if (!isEdit && price == null) {
+            throw new FCBException(Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY);
+        }
+        if (!isEdit && flag == null) {
+            throw new FCBException(Constants.ErrorMsg.Goods.FLAG_CANNOT_BE_EMPTY);
+        }
+    }
+
+    public Goods createGoods() {
+        Goods goods = new Goods();
+        createOrEdit(goods);
+        return goods;
+    }
+
+    public Goods updateGoods() {
+        Goods goods = new Goods();
+        goods.setId(id);
+        createOrEdit(goods);
+        return goods;
+    }
+
+    private Goods createOrEdit(Goods goods) {
+        goods.setName(name);
+        goods.setCoverImg(coverImg);
+        goods.setPrice(price);
+        goods.setDiscount(discount);
+        goods.setFlag(flag);
+        goods.setStatus(StatusEnum.NORMAL_STATUS.getCode());
+        return goods;
+    }
+}
