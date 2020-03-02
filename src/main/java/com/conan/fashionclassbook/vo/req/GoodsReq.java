@@ -4,7 +4,6 @@ import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Goods;
-import com.github.pagehelper.PageHelper;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,6 +16,7 @@ public class GoodsReq {
     private Long id;
     private String name;
     private String coverImg;//封面
+    private Long categoryId;
     private BigDecimal price;
     private Double discount; //折扣，例如9.5折
     private String desc;//介绍
@@ -37,6 +37,9 @@ public class GoodsReq {
         }
         if (!isEdit && StringUtils.isEmpty(coverImg)) {
             throw new FCBException(Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY);
+        }
+        if (!isEdit && categoryId == null) {
+            throw new FCBException(Constants.ErrorMsg.Goods.CATEGORY_ID_CANNOT_BE_EMPTY);
         }
         if (!isEdit && price == null) {
             throw new FCBException(Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY);
@@ -62,6 +65,7 @@ public class GoodsReq {
     private Goods createOrEdit(Goods goods) {
         goods.setName(name);
         goods.setCoverImg(coverImg);
+        goods.setCategoryId(categoryId);
         goods.setPrice(price);
         goods.setDiscount(discount);
         goods.setFlag(flag);

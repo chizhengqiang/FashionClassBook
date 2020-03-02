@@ -9,7 +9,6 @@ import com.conan.fashionclassbook.pojo.Goods;
 import com.conan.fashionclassbook.service.IGoodsService;
 import com.conan.fashionclassbook.vo.req.GoodsReq;
 import com.conan.fashionclassbook.vo.resp.GoodsResp;
-import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -42,7 +41,7 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         Goods goods = goodsMapper.getById(id);
         if (goods == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_GOODS_RECORD);
+            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
         }
         GoodsResp goodsResp = new GoodsResp();
         BeanUtils.copyProperties(goods, goodsResp);
@@ -82,7 +81,7 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         Goods goods = goodsMapper.getById(id);
         if (goods == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_GOODS_RECORD);
+            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
         }
         int resultCount = goodsMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {

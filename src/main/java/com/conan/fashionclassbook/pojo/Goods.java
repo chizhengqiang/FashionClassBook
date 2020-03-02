@@ -12,6 +12,7 @@ public class Goods implements Serializable {
     private Long id;
     private String name;
     private String coverImg;
+    private Long categoryId;
     private BigDecimal price;
     private Double discount; //折扣，例如9.5折
     private String desc;//介绍

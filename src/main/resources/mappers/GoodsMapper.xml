@@ -6,6 +6,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="cover_img" property="coverImg" jdbcType="VARCHAR"/>
+        <result column="category_id" property="CategoryId" jdbcType="INTEGER"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="discount" property="discount" jdbcType="DOUBLE"/>
         <result column="desc" property="desc" jdbcType="VARCHAR"/>
@@ -18,23 +19,28 @@
     <sql id="goods">fcb_goods</sql>
 
     <sql id="Base_Column_List">
-        id, name, cover_img, `price`, `discount`, `desc`, `flag`, `status`, create_time, last_time
+        id, name, cover_img, category_id, `price`, `discount`, `desc`, `flag`, `status`, create_time, last_time
     </sql>
 
     <select id="findAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from <include refid="goods"/> where status != 9
+        from
+        <include refid="goods"/>
+        where status != 9
     </select>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="Long">
         select
         <include refid="Base_Column_List"/>
-        from <include refid="goods"/> where status != 9 AND id = #{id}
+        from
+        <include refid="goods"/>
+        where status != 9 AND id = #{id}
     </select>
 
     <insert id="insertSelective" parameterType="com.conan.fashionclassbook.pojo.Goods">
-        insert into <include refid="goods"/>
+        insert into
+        <include refid="goods"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -44,6 +50,9 @@
             </if>
             <if test="coverImg != null">
                 cover_img,
+            </if>
+            <if test="categoryId != null">
+                category_id,
             </if>
             <if test="price != null">
                 price,
@@ -77,6 +86,9 @@
             <if test="coverImg != null">
                 #{coverImg,jdbcType=VARCHAR},
             </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
             <if test="price != null">
                 #{price,jdbcType=DECIMAL},
             </if>
@@ -102,24 +114,28 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.conan.fashionclassbook.pojo.Goods">
-        update <include refid="goods"/>
+        update
+        <include refid="goods"/>
         <set>
             <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
+                `name` = #{name,jdbcType=VARCHAR},
             </if>
             <if test="coverImg != null">
                 cover_img = #{coverImg,jdbcType=VARCHAR},
             </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=VARCHAR},
+            </if>
             <if test="desc != null">
                 `desc` = #{desc,jdbcType=VARCHAR},
             </if>
-             <if test="price != null">
+            <if test="price != null">
                 `price` = #{price,jdbcType=DECIMAL},
             </if>
             <if test="discount != null">
                 `discount` = #{discount,jdbcType=DOUBLE},
             </if>
-             <if test="flag != null">
+            <if test="flag != null">
                 `flag` = #{flag,jdbcType=BOOLEAN},
             </if>
             <if test="status != null">
@@ -136,7 +152,9 @@
     </update>
 
     <update id="changeStatusById" parameterType="map">
-    update <include refid="goods"/> set `status` = #{status} where id = #{id}
-  </update>
+        update
+        <include refid="goods"/>
+        set `status` = #{status} where id = #{id}
+    </update>
 
 </mapper>

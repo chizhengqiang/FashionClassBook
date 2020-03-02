@@ -11,6 +11,7 @@ public class GoodsResp {
     private Long id;
     private String title;
     private String coverImg;
+    private Long categoryId;
     private BigDecimal price;
     private Double discount; //折扣，例如9.5折
     private String desc;//介绍
