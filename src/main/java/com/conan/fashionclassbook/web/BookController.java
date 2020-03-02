@@ -2,7 +2,7 @@ package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.pojo.Book;
-import com.conan.fashionclassbook.service.BookService;
+import com.conan.fashionclassbook.service.IBookService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    IBookService IBookService;
 
     /**
      * @param page
@@ -27,28 +27,28 @@ public class BookController {
     @GetMapping("/books/{page}/{size}")
     @ApiOperation("分页")
     public ServerResponse findPage(@PathVariable("page") Integer page, @PathVariable("size") Integer size) {
-        ServerResponse<PageInfo<Book>> response = bookService.findPage(page, size);
+        ServerResponse<PageInfo<Book>> response = IBookService.findPage(page, size);
         return response;
     }
 
     @GetMapping("/books")
     @ApiOperation("列表")
     public ServerResponse findAll() {
-        ServerResponse<List<Book>> response = bookService.findAll();
+        ServerResponse<List<Book>> response = IBookService.findAll();
         return ServerResponse.createBySuccess();
     }
 
     @PostMapping("/books")
     @ApiOperation(("增加"))
     public ServerResponse add(@RequestBody Book book) {
-        ServerResponse<String> response = bookService.insert(book);
+        ServerResponse<String> response = IBookService.insert(book);
         return response;
     }
 
     @PutMapping("/books")
     @ApiOperation("修改")
     public ServerResponse update(@RequestBody Book book) {
-        ServerResponse<String> response = bookService.update(book);
+        ServerResponse<String> response = IBookService.update(book);
         return response;
     }
 
@@ -60,7 +60,7 @@ public class BookController {
     @DeleteMapping("/books/{id}")
     @ApiOperation("删除")
     public ServerResponse<String> deleteOne(@PathVariable("id") Integer id) {
-        ServerResponse<String> response = bookService.deleteOne(id);
+        ServerResponse<String> response = IBookService.deleteOne(id);
         return response;
     }
 }

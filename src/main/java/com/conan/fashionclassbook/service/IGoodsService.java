@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IGoodsService {
 
-    public List<GoodsResp> findAll() throws FCBException;
+    List<GoodsResp> findAll() throws FCBException;
 
     ServerResponse<GoodsResp> getById(Long id) throws FCBException;
 

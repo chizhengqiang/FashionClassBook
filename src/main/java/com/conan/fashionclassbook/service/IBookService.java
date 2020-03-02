@@ -6,9 +6,9 @@ import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
-public interface BookService {
+public interface IBookService {
 
-    public ServerResponse<String> deleteOne(Integer id);
+    ServerResponse<String> deleteOne(Integer id);
 
     ServerResponse<List<Book>> findAll();
 

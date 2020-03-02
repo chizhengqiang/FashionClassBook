@@ -11,11 +11,11 @@ import java.util.List;
 public interface IBannerService {
 
 
-    public ServerResponse<List<BannerResp>> findAll() throws FCBException;
+    ServerResponse<List<BannerResp>> findAll() throws FCBException;
 
-    public ServerResponse<PageInfo<BannerResp>> findPage(Integer page, Integer size) throws FCBException;
+    ServerResponse<PageInfo<BannerResp>> findPage(Integer page, Integer size) throws FCBException;
 
-    public ServerResponse<BannerResp> getById(Long id) throws FCBException;
+    ServerResponse<BannerResp> getById(Long id) throws FCBException;
 
     ServerResponse<String> createBanner(BannerReq request) throws FCBException;
 

@@ -4,19 +4,22 @@ import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.dao.BookMapper;
 import com.conan.fashionclassbook.pojo.Book;
-import com.conan.fashionclassbook.service.BookService;
+import com.conan.fashionclassbook.service.IBookService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * 纪念册业务层
  */
+@Slf4j
 @Service
-public class BookServiceImpl implements BookService {
+public class BookServiceImpl implements IBookService {
 
     @Autowired
     BookMapper bookMapper;
@@ -28,6 +31,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
+    @Transactional
     public ServerResponse<String> deleteOne(Integer id) {
         Book book = bookMapper.getById(id);
         if (book == null) {
@@ -58,6 +62,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
+    @Transactional
     public ServerResponse<String> insert(Book book) {
         int resultCount = bookMapper.insertSelective(book);
         if (resultCount <= 0) {
@@ -73,6 +78,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
+    @Transactional
     public ServerResponse<String> update(Book book) {
         int resultCount = bookMapper.updateByPrimaryKeySelective(book);
         if (resultCount <= 0) {

@@ -16,5 +16,5 @@ public interface ICategoryService {
 
     ServerResponse<String> updateCategory(CategoryReq categoryReq) throws FCBException;
 
-    public ServerResponse<String> deleteById(Long id) throws FCBException;
+    ServerResponse<String> deleteById(Long id) throws FCBException;
 }
