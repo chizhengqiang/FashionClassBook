@@ -184,7 +184,7 @@
     update fcb_customer set `status` = #{status} where id = #{id}
   </update>
 
-    <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getById" parameterType="Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from `fcb_customer` where status != 9 AND id = #{id}

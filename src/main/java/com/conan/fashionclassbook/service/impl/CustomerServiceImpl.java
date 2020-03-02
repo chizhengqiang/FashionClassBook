@@ -3,17 +3,21 @@ package com.conan.fashionclassbook.service.impl;
 import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.dao.CustomerMapper;
+import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.service.ICustomerService;
 import com.conan.fashionclassbook.utils.MD5Util;
 import com.conan.fashionclassbook.utils.UUIDUtil;
 import com.conan.fashionclassbook.vo.req.CustomerReq;
+import com.conan.fashionclassbook.vo.resp.CustomerResp;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,11 +30,6 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private RedisTemplate redisTemplate;
-
-    @Override
-    public ServerResponse<String> insertCustomer(CustomerReq customerReq) throws FCBException {
-        return null;
-    }
 
     /**
      * 登陆
@@ -67,6 +66,7 @@ public class CustomerServiceImpl implements ICustomerService {
      * @throws FCBException
      */
     @Override
+    @Transactional
     public ServerResponse<String> register(CustomerReq req) throws FCBException {
         req.validate(false);
         Customer customer = req.createCustomer();
@@ -75,5 +75,37 @@ public class CustomerServiceImpl implements ICustomerService {
             return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.SUCCESS);
         }
         return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.FAIR);
+    }
+
+    /**
+     * 获取
+     *
+     * @param id
+     * @return
+     * @throws FCBException
+     */
+    @Override
+    public ServerResponse<CustomerResp> getById(Long id) throws FCBException {
+        Customer customer = customerMapper.getById(id);
+        if (customer == null) {
+            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
+        }
+        CustomerResp customerResp = new CustomerResp();
+        BeanUtils.copyProperties(customer, customerResp);
+        return ServerResponse.createBySuccess(customerResp);
+    }
+
+    @Override
+    @Transactional
+    public ServerResponse<String> deleteById(Long id) throws FCBException {
+        Customer customer = customerMapper.getById(id);
+        if (customer == null) {
+            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
+        }
+        int resultCount = customerMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
+        if (resultCount > 0) {
+            return ServerResponse.createBySuccessMessage(Constants.DeleteStatusMsg.SUCCESS);
+        }
+        return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
     }
 }

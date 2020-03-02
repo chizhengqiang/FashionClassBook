@@ -19,9 +19,9 @@ public interface CustomerMapper {
 
     List<Customer> findAll();
 
-    int changeStatusById(@Param("status") Integer status, @Param("id") Integer id);
+    int changeStatusById(@Param("status") Integer status, @Param("id") Long id);
 
-    Customer getById(Integer id);
+    Customer getById(Long id);
 
     int getCountByNickname(String nickname);
 }

@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
 
     @Override
+    @Transactional
     public ServerResponse<String> insertGoods(GoodsReq req) throws FCBException {
         req.validate(false); //校验
         Goods goods = req.createGoods();
@@ -57,10 +59,11 @@ public class GoodsServiceImpl implements IGoodsService {
         if (resultCount > 0) {
             return ServerResponse.createBySuccess(Constants.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createBySuccess(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
     }
 
     @Override
+    @Transactional
     public ServerResponse<String> updateGoods(GoodsReq req) throws FCBException {
         req.validate(true);
         Goods goods = req.updateGoods();
@@ -68,10 +71,11 @@ public class GoodsServiceImpl implements IGoodsService {
         if (resultCount > 0) {
             return ServerResponse.createBySuccess(Constants.UpdateStatusMsg.SUCCESS);
         }
-        return ServerResponse.createBySuccess(Constants.UpdateStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.UpdateStatusMsg.FAIR);
     }
 
     @Override
+    @Transactional
     public ServerResponse<String> deleteById(Long id) throws FCBException {
         if (id == null) {
             throw new FCBException(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
@@ -82,7 +86,7 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         int resultCount = goodsMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {
-            return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.DeleteStatusMsg.SUCCESS);
         }
         return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
     }
