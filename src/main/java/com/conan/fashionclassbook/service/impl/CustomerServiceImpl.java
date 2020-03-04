@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements ICustomerService {
         String token = UUIDUtil.getUUID32();
         customer.setPassword(StringUtils.EMPTY);
         redisTemplate.opsForValue().set(token, customer, 1, TimeUnit.HOURS);
-        return ServerResponse.createBySuccess("登陆成功", token);
+        return ServerResponse.createBySuccess(Constants.SuccessMsg.LOGIN_SUCCESS, token);
     }
 
     /**
@@ -72,9 +72,9 @@ public class CustomerServiceImpl implements ICustomerService {
         Customer customer = req.createCustomer();
         int resultCount = customerMapper.insertSelective(customer);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     /**
@@ -104,8 +104,8 @@ public class CustomerServiceImpl implements ICustomerService {
         }
         int resultCount = customerMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.DeleteStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.DeleteStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
     }
 }

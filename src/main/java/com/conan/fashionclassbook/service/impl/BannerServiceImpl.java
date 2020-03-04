@@ -76,9 +76,9 @@ public class BannerServiceImpl implements IBannerService {
         }
         int result = bannerMapper.insertSelective(request.createBanner());
         if (result > 0) {
-            return ServerResponse.createBySuccess(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccess(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     /**
@@ -96,9 +96,9 @@ public class BannerServiceImpl implements IBannerService {
         }
         int result = bannerMapper.updateByPrimaryKeySelective(req.updateBanner());
         if (result > 0) {
-            return ServerResponse.createBySuccess(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccess(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     /**
@@ -115,9 +115,9 @@ public class BannerServiceImpl implements IBannerService {
         }
         int result = bannerMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (result > 0) {
-            return ServerResponse.createBySuccess(Constants.DeleteStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccess(Constants.CommonsMsg.DeleteStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
     }
 
     @Override

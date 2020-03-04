@@ -38,9 +38,9 @@ public class CategoryServiceImpl implements ICategoryService {
         Category category = categoryReq.createCategory();
         int resultCount = categoryMapper.insertSelective(category);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     /**
@@ -57,9 +57,9 @@ public class CategoryServiceImpl implements ICategoryService {
         Category category = categoryReq.updateCategory();
         int resultCount = categoryMapper.updateByPrimaryKeySelective(category);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     /**
@@ -78,8 +78,8 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         int resultCount = categoryMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.DeleteStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.DeleteStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
     }
 }

@@ -2,6 +2,34 @@ package com.conan.fashionclassbook.commons;
 
 public class Constants {
 
+
+    public static class CommonsMsg {
+
+        public static class InsertStatusMsg {
+
+            public static final String SUCCESS = "添加成功";
+
+            public static final String FAIR = "添加失败";
+        }
+
+        public static class DeleteStatusMsg {
+
+            public static final String SUCCESS = "删除成功";
+
+            public static final String FAIR = "删除失败";
+        }
+
+        public static class UpdateStatusMsg {
+            public static final String SUCCESS = "修改成功";
+            public static final String FAIR = "修改失败";
+        }
+    }
+
+    public static class SuccessMsg {
+
+        public static final String LOGIN_SUCCESS = "登陆成功";
+    }
+
     public static class ErrorMsg {
 
         public static final String REQUEST_PARAM_ERROR = "请求参数错误";
@@ -41,24 +69,5 @@ public class Constants {
             public static final String CAN_NOT_FIND_RECORD = "该商品记录不存在";
             public static final String CATEGORY_ID_CANNOT_BE_EMPTY = "商品分类不能为空";
         }
-    }
-
-    public static class InsertStatusMsg {
-
-        public static final String SUCCESS = "添加成功";
-
-        public static final String FAIR = "添加失败";
-    }
-
-    public static class DeleteStatusMsg {
-
-        public static final String SUCCESS = "删除成功";
-
-        public static final String FAIR = "删除失败";
-    }
-
-    public static class UpdateStatusMsg {
-        public static final String SUCCESS = "修改成功";
-        public static final String FAIR = "修改失败";
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface IBannerService {
 
-
     ServerResponse<List<BannerResp>> findAll() throws FCBException;
 
     ServerResponse<PageInfo<BannerResp>> findPage(Integer page, Integer size) throws FCBException;

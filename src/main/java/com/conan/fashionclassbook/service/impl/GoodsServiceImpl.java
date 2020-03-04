@@ -56,9 +56,9 @@ public class GoodsServiceImpl implements IGoodsService {
         Goods goods = req.createGoods();
         int resultCount = goodsMapper.insertSelective(goods);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccess(Constants.InsertStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccess(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.InsertStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
     }
 
     @Override
@@ -68,9 +68,9 @@ public class GoodsServiceImpl implements IGoodsService {
         Goods goods = req.updateGoods();
         int resultCount = goodsMapper.updateByPrimaryKeySelective(goods);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccess(Constants.UpdateStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccess(Constants.CommonsMsg.UpdateStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.UpdateStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.UpdateStatusMsg.FAIR);
     }
 
     @Override
@@ -85,8 +85,8 @@ public class GoodsServiceImpl implements IGoodsService {
         }
         int resultCount = goodsMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {
-            return ServerResponse.createBySuccessMessage(Constants.DeleteStatusMsg.SUCCESS);
+            return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.DeleteStatusMsg.SUCCESS);
         }
-        return ServerResponse.createByErrorMessage(Constants.DeleteStatusMsg.FAIR);
+        return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
     }
 }
