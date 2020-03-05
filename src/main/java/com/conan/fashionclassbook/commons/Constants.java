@@ -2,20 +2,15 @@ package com.conan.fashionclassbook.commons;
 
 public class Constants {
 
-
     public static class CommonsMsg {
 
         public static class InsertStatusMsg {
-
             public static final String SUCCESS = "添加成功";
-
             public static final String FAIR = "添加失败";
         }
 
         public static class DeleteStatusMsg {
-
             public static final String SUCCESS = "删除成功";
-
             public static final String FAIR = "删除失败";
         }
 
@@ -25,19 +20,25 @@ public class Constants {
         }
     }
 
-    public static class SuccessMsg {
+    public static class Files{
+        public static final String CAN_NOT_FIND_RECORD = "上传文件不能为空";
+        public static final String UPLOAD_SUCCESS = "上传文件成功";
+        public static final String UPLOAD_FAIR = "上传文件失败";
+    }
 
+    public static class SuccessMsg {
         public static final String LOGIN_SUCCESS = "登陆成功";
+        public static final String LOGOUT_SUCCESS = "退出成功";
     }
 
     public static class ErrorMsg {
-
         public static final String REQUEST_PARAM_ERROR = "请求参数错误";
-
         public static final String CAN_NOT_FIND_RECORD = "找不到数据记录";
-
         public static final String CAN_NOT_FIND_BANNER_RECORD = "该记录不存在";
 
+        /**
+         * 用户
+         */
         public static class Customer {
             public static final String ID_CANNOT_BE_EMPTY = "用户ID不能为空";
             public static final String NICKNAME_CANNOT_BE_EMPTY = "用户昵称不能为空";

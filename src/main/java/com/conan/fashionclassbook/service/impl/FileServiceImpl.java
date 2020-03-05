@@ -1,6 +1,7 @@
 package com.conan.fashionclassbook.service.impl;
 
 import com.conan.fashionclassbook.commons.Const;
+import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.service.FileService;
 import com.conan.fashionclassbook.utils.FTPUtil;
@@ -30,7 +31,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public ServerResponse<File> upload(MultipartFile file) {
         if (file.isEmpty()) {
-            return ServerResponse.createByErrorMessage("上传文件不能为空");
+            return ServerResponse.createByErrorMessage(Constants.Files.CAN_NOT_FIND_RECORD);
         }
         //文件名称
         String fileName = file.getOriginalFilename();
@@ -47,9 +48,9 @@ public class FileServiceImpl implements FileService {
             file.transferTo(fileInfo);
         } catch (IOException e) {
             log.error("上传文件失败： {}", e);
-            return ServerResponse.createByErrorMessage("上传文件失败");
+            return ServerResponse.createByErrorMessage(Constants.Files.UPLOAD_FAIR);
         }
-        return ServerResponse.createBySuccess("上传文件成功", fileInfo);
+        return ServerResponse.createBySuccess(Constants.Files.UPLOAD_SUCCESS, fileInfo);
 
     }
 
@@ -87,10 +88,10 @@ public class FileServiceImpl implements FileService {
 
         } catch (IOException e) {
             log.error("上传文件异常", e);
-            return ServerResponse.createByErrorMessage("上传失败");
+            return ServerResponse.createByErrorMessage(Constants.Files.UPLOAD_FAIR);
         }
 
-        return ServerResponse.createBySuccess("上传成功", PropertiesUtil.getProperty("ftp.server.http.prefix") + uploadFileName);
+        return ServerResponse.createBySuccess(Constants.Files.UPLOAD_SUCCESS, PropertiesUtil.getProperty("ftp.server.http.prefix") + uploadFileName);
 
     }
 }
