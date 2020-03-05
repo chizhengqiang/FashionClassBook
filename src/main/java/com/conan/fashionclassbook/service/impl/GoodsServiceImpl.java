@@ -4,7 +4,6 @@ import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.dao.GoodsMapper;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Goods;
 import com.conan.fashionclassbook.service.IGoodsService;
 import com.conan.fashionclassbook.vo.req.GoodsReq;
@@ -26,7 +25,7 @@ public class GoodsServiceImpl implements IGoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public List<GoodsResp> findAll() throws FCBException {
+    public List<GoodsResp> findAll() {
 
         //TODO
         List<Goods> goods = goodsMapper.findAll();
@@ -35,13 +34,13 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
-    public ServerResponse<GoodsResp> getById(Long id) throws FCBException {
+    public ServerResponse<GoodsResp> getById(Long id) {
         if (id == null) {
-            throw new FCBException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
         Goods goods = goodsMapper.getById(id);
         if (goods == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
         }
         GoodsResp goodsResp = new GoodsResp();
         BeanUtils.copyProperties(goods, goodsResp);
@@ -51,7 +50,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Override
     @Transactional
-    public ServerResponse<String> insertGoods(GoodsReq req) throws FCBException {
+    public ServerResponse<String> insertGoods(GoodsReq req) {
         req.validate(false); //校验
         Goods goods = req.createGoods();
         int resultCount = goodsMapper.insertSelective(goods);
@@ -63,7 +62,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Override
     @Transactional
-    public ServerResponse<String> updateGoods(GoodsReq req) throws FCBException {
+    public ServerResponse<String> updateGoods(GoodsReq req) {
         req.validate(true);
         Goods goods = req.updateGoods();
         int resultCount = goodsMapper.updateByPrimaryKeySelective(goods);
@@ -75,13 +74,13 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Override
     @Transactional
-    public ServerResponse<String> deleteById(Long id) throws FCBException {
+    public ServerResponse<String> deleteById(Long id) {
         if (id == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
         }
         Goods goods = goodsMapper.getById(id);
         if (goods == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.CAN_NOT_FIND_RECORD);
         }
         int resultCount = goodsMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {

@@ -4,7 +4,6 @@ import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.dao.BannerMapper;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Banner;
 import com.conan.fashionclassbook.service.IBannerService;
 import com.conan.fashionclassbook.vo.req.BannerReq;
@@ -32,10 +31,9 @@ public class BannerServiceImpl implements IBannerService {
 
     /**
      * @return
-     * @throws FCBException
      */
     @Override
-    public ServerResponse<List<BannerResp>> findAll() throws FCBException {
+    public ServerResponse<List<BannerResp>> findAll() {
         List<Banner> list = bannerMapper.findAll();
         List<BannerResp> bannerRespList = Lists.newArrayList();
         BeanUtils.copyProperties(list, bannerRespList);
@@ -43,7 +41,7 @@ public class BannerServiceImpl implements IBannerService {
     }
 
     @Override
-    public ServerResponse<PageInfo<BannerResp>> findPage(Integer page, Integer size) throws FCBException {
+    public ServerResponse<PageInfo<BannerResp>> findPage(Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<Banner> list = bannerMapper.findAll();
         List<BannerResp> bannerRespList = Lists.newArrayList();
@@ -53,10 +51,10 @@ public class BannerServiceImpl implements IBannerService {
     }
 
     @Override
-    public ServerResponse<BannerResp> getById(Long id) throws FCBException {
+    public ServerResponse<BannerResp> getById(Long id) {
         Banner banner = bannerMapper.getById(id);
         if (banner == null) {
-            throw new FCBException(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
         }
         BannerResp bannerResp = new BannerResp();
         BeanUtils.copyProperties(banner, bannerResp);
@@ -70,9 +68,9 @@ public class BannerServiceImpl implements IBannerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> createBanner(BannerReq request) throws FCBException {
+    public ServerResponse<String> createBanner(BannerReq request) {
         if (!request.createValidate()) {
-            throw new FCBException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
         int result = bannerMapper.insertSelective(request.createBanner());
         if (result > 0) {
@@ -90,9 +88,9 @@ public class BannerServiceImpl implements IBannerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> updateBanner(BannerReq req) throws FCBException {
+    public ServerResponse<String> updateBanner(BannerReq req) {
         if (!req.updateValidate()) {
-            throw new FCBException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
         int result = bannerMapper.updateByPrimaryKeySelective(req.updateBanner());
         if (result > 0) {
@@ -108,10 +106,10 @@ public class BannerServiceImpl implements IBannerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> deleteOne(Long id) throws FCBException {
+    public ServerResponse<String> deleteOne(Long id) {
         Banner banner = bannerMapper.getById(id);
         if (banner == null) {
-            throw new FCBException(Constants.ErrorMsg.CAN_NOT_FIND_BANNER_RECORD);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.CAN_NOT_FIND_BANNER_RECORD);
         }
         int result = bannerMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (result > 0) {
@@ -122,7 +120,7 @@ public class BannerServiceImpl implements IBannerService {
 
     @Override
     @Transactional
-    public ServerResponse<String> deleteByIds(List<Long> ids) throws FCBException {
+    public ServerResponse<String> deleteByIds(List<Long> ids){
         // TODO 删除选中
         return null;
     }

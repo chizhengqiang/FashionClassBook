@@ -1,7 +1,6 @@
 package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.service.ICustomerService;
 import com.conan.fashionclassbook.vo.resp.CustomerResp;
 import io.swagger.annotations.Api;
@@ -22,7 +21,7 @@ public class CustomerController {
     @GetMapping("/customers/{id}")
     @ApiOperation("获取一个用户")
     public ServerResponse<CustomerResp> getById(@PathVariable @NotNull Long id)
-            throws FCBException {
+             {
         ServerResponse<CustomerResp> response = customerService.getById(id);
         return response;
     }
@@ -35,7 +34,7 @@ public class CustomerController {
      */
     @DeleteMapping("/customers/{id}")
     @ApiOperation("删除一个用户")
-    public ServerResponse<String> deleteById(@PathVariable @NotNull Long id) throws FCBException {
+    public ServerResponse<String> deleteById(@PathVariable @NotNull Long id)  {
         ServerResponse<String> response = customerService.deleteById(id);
         return response;
     }

@@ -1,7 +1,6 @@
 package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.service.ICustomerService;
 import com.conan.fashionclassbook.vo.req.CustomerReq;
 import io.swagger.annotations.Api;
@@ -30,7 +29,7 @@ public class LoginController {
     @GetMapping("/login")
     @ApiOperation("用户登陆接口")
     public ServerResponse<String> login(@RequestParam(value = "nickname") String nickname,
-                                        @RequestParam(value = "password") String password) throws FCBException {
+                                        @RequestParam(value = "password") String password)  {
         ServerResponse<String> response = customerService.login(nickname, password);
         return response;
     }
@@ -43,7 +42,7 @@ public class LoginController {
      */
     @ApiOperation("用户注册接口")
     @PostMapping("/register")
-    public ServerResponse<String> register(@RequestBody CustomerReq req) throws FCBException {
+    public ServerResponse<String> register(@RequestBody CustomerReq req)  {
         ServerResponse<String> response = customerService.register(req);
         return response;
     }
@@ -56,7 +55,7 @@ public class LoginController {
      */
     @GetMapping("/logout")
     @ApiOperation("用户退出接口")
-    public ServerResponse<String> logout(String token) throws FCBException {
+    public ServerResponse<String> logout(String token)  {
         //清除token
         redisTemplate.delete(token);
         return ServerResponse.createBySuccessMessage("退出成功");

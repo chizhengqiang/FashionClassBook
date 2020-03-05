@@ -1,8 +1,8 @@
 package com.conan.fashionclassbook.vo.req;
 
 import com.conan.fashionclassbook.commons.Constants;
+import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.utils.MD5Util;
 import com.conan.fashionclassbook.utils.UUIDUtil;
@@ -31,19 +31,20 @@ public class CustomerReq {
     private Date createTime;
     private Date lastTime;
 
-    public void validate(boolean isExit) throws FCBException {
+    public ServerResponse<String> validate(boolean isExit) {
         if (isExit && id == null) {
-            throw new FCBException(Constants.ErrorMsg.Customer.ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.ID_CANNOT_BE_EMPTY);
         }
         if (!isExit && StringUtils.isBlank(nickname)) {
-            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EMPTY);
         }
         if (!isExit && StringUtils.isBlank(password)) {
-            throw new FCBException(Constants.ErrorMsg.Customer.PASSWORD_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.PASSWORD_CANNOT_BE_EMPTY);
         }
         if (!isExit && type == null) {
-            throw new FCBException(Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY);
         }
+        return ServerResponse.createBySuccess();
     }
 
     public Customer createCustomer() {

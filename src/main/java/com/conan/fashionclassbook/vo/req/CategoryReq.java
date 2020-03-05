@@ -1,8 +1,8 @@
 package com.conan.fashionclassbook.vo.req;
 
 import com.conan.fashionclassbook.commons.Constants;
+import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Category;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -19,16 +19,17 @@ public class CategoryReq {
     private Date createTime;
     private Date lastTime;
 
-    public void validate(Boolean isExit) throws FCBException {
+    public ServerResponse<String> validate(Boolean isExit) {
         if (isExit && id == null) {
-            throw new FCBException(Constants.ErrorMsg.Category.ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.ID_CANNOT_BE_EMPTY);
         }
         if (!isExit && StringUtils.isEmpty(name)) {
-            throw new FCBException(Constants.ErrorMsg.Category.NAME_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.NAME_CANNOT_BE_EMPTY);
         }
         if (!isExit && parentId == null) {
-            throw new FCBException(Constants.ErrorMsg.Category.PARENT_ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.PARENT_ID_CANNOT_BE_EMPTY);
         }
+        return ServerResponse.createBySuccess();
     }
 
     public Category createCategory() {

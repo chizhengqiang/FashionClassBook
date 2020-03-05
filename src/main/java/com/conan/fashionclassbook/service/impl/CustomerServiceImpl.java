@@ -4,7 +4,6 @@ import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.dao.CustomerMapper;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.service.ICustomerService;
 import com.conan.fashionclassbook.utils.MD5Util;
@@ -37,20 +36,20 @@ public class CustomerServiceImpl implements ICustomerService {
      * @param nickname
      * @param password
      * @return token
-     * @throws FCBException
+     * @
      */
     @Override
-    public ServerResponse<String> login(String nickname, String password) throws FCBException {
+    public ServerResponse<String> login(String nickname, String password)  {
         int resultCount = customerMapper.getCountByNickname(nickname);
         if (resultCount <= 0) {
-            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
         }
         //盐
         String uuid = customerMapper.getUUIDByNickName(nickname);
         String md5Password = MD5Util.MD5EncodeUtf8(uuid, password);
         Customer customer = customerMapper.findByNicknameAndPassword(nickname, md5Password);
         if (customer == null) {
-            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_PASSWORD_CANNOT_BE_ERROR);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_PASSWORD_CANNOT_BE_ERROR);
         }
         String token = UUIDUtil.getUUID32();
         customer.setPassword(StringUtils.EMPTY);
@@ -63,11 +62,11 @@ public class CustomerServiceImpl implements ICustomerService {
      *
      * @param req
      * @return
-     * @throws FCBException
+     * @
      */
     @Override
     @Transactional
-    public ServerResponse<String> register(CustomerReq req) throws FCBException {
+    public ServerResponse<String> register(CustomerReq req)  {
         req.validate(false);
         Customer customer = req.createCustomer();
         int resultCount = customerMapper.insertSelective(customer);
@@ -82,13 +81,13 @@ public class CustomerServiceImpl implements ICustomerService {
      *
      * @param id
      * @return
-     * @throws FCBException
+     * @
      */
     @Override
-    public ServerResponse<CustomerResp> getById(Long id) throws FCBException {
+    public ServerResponse<CustomerResp> getById(Long id)  {
         Customer customer = customerMapper.getById(id);
         if (customer == null) {
-            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
         }
         CustomerResp customerResp = new CustomerResp();
         BeanUtils.copyProperties(customer, customerResp);
@@ -97,10 +96,10 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     @Transactional
-    public ServerResponse<String> deleteById(Long id) throws FCBException {
+    public ServerResponse<String> deleteById(Long id)  {
         Customer customer = customerMapper.getById(id);
         if (customer == null) {
-            throw new FCBException(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
         }
         int resultCount = customerMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount > 0) {

@@ -1,8 +1,8 @@
 package com.conan.fashionclassbook.vo.req;
 
 import com.conan.fashionclassbook.commons.Constants;
+import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Goods;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -28,25 +28,26 @@ public class GoodsReq {
     /**
      * @param isEdit true 编辑
      */
-    public void validate(Boolean isEdit) throws FCBException {
+    public ServerResponse<String> validate(Boolean isEdit) {
         if (isEdit && id == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
         }
         if (!isEdit && (StringUtils.isEmpty(name))) {
-            throw new FCBException(Constants.ErrorMsg.Goods.NAME_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.NAME_CANNOT_BE_EMPTY);
         }
         if (!isEdit && StringUtils.isEmpty(coverImg)) {
-            throw new FCBException(Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY);
         }
         if (!isEdit && categoryId == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.CATEGORY_ID_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.CATEGORY_ID_CANNOT_BE_EMPTY);
         }
         if (!isEdit && price == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY);
         }
         if (!isEdit && flag == null) {
-            throw new FCBException(Constants.ErrorMsg.Goods.FLAG_CANNOT_BE_EMPTY);
+            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.FLAG_CANNOT_BE_EMPTY);
         }
+        return ServerResponse.createBySuccess();
     }
 
     public Goods createGoods() {
