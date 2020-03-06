@@ -36,7 +36,15 @@ public class BannerServiceImpl implements IBannerService {
     public ServerResponse<List<BannerResp>> findAll() {
         List<Banner> list = bannerMapper.findAll();
         List<BannerResp> bannerRespList = Lists.newArrayList();
-        BeanUtils.copyProperties(list, bannerRespList);
+
+        list.stream().forEach(
+                x -> {
+                    BannerResp bannerResp = new BannerResp();
+                    BeanUtils.copyProperties(x, bannerResp);
+                    bannerRespList.add(bannerResp);
+                }
+        );
+        log.info("bannerRespList:\t {}", bannerRespList);
         return ServerResponse.createBySuccess(bannerRespList);
     }
 
@@ -45,7 +53,12 @@ public class BannerServiceImpl implements IBannerService {
         PageHelper.startPage(page, size);
         List<Banner> list = bannerMapper.findAll();
         List<BannerResp> bannerRespList = Lists.newArrayList();
-        BeanUtils.copyProperties(list, bannerRespList);
+        list.stream().forEach(x -> {
+            BannerResp bannerResp = new BannerResp();
+            BeanUtils.copyProperties(x, bannerResp);
+            bannerRespList.add(bannerResp);
+        });
+        log.info("bannerResp : \t {}", bannerRespList);
         PageInfo<BannerResp> pageInfo = new PageInfo<>(bannerRespList);
         return ServerResponse.createBySuccess(pageInfo);
     }

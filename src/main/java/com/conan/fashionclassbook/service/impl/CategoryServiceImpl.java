@@ -31,7 +31,10 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     @Transactional
     public ServerResponse<String> insertCategory(CategoryReq categoryReq) {
-        categoryReq.validate(false);
+        String errorMsg = categoryReq.validate(false);
+        if(errorMsg != null){
+            return ServerResponse.createByErrorMessage(errorMsg);
+        }
         Category category = categoryReq.createCategory();
         int resultCount = categoryMapper.insertSelective(category);
         if (resultCount > 0) {
@@ -50,7 +53,10 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     @Transactional
     public ServerResponse<String> updateCategory(CategoryReq categoryReq) {
-        categoryReq.validate(true);
+        String errorMsg = categoryReq.validate(true);
+        if(errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
+        }
         Category category = categoryReq.updateCategory();
         int resultCount = categoryMapper.updateByPrimaryKeySelective(category);
         if (resultCount > 0) {

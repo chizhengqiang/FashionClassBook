@@ -1,7 +1,6 @@
 package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
-import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.service.IBannerService;
 import com.conan.fashionclassbook.vo.req.BannerReq;
 import com.conan.fashionclassbook.vo.resp.BannerResp;
@@ -24,8 +23,7 @@ public class BannerController {
     @GetMapping("/banners/{page}/{size}")
     @ApiOperation("分页查询轮播图列表")
     public ServerResponse<PageInfo<BannerResp>> findPage(@PathVariable(value = "page") Integer page,
-                                                         @PathVariable(value = "size") Integer size)
-            throws FCBException {
+                                                         @PathVariable(value = "size") Integer size) {
         ServerResponse<PageInfo<BannerResp>> response = bannerService.findPage(page, size);
         return response;
     }
