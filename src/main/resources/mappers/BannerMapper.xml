@@ -13,6 +13,10 @@
         <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
+    <sql id="banner">
+        fcb_banner
+    </sql>
+
     <sql id="Base_Column_List">
         id, title, url, `desc`, `type`,`status`, create_time, last_time
     </sql>
@@ -20,17 +24,17 @@
     <select id="findAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from banner where status != 9
+        from <include refid="banner"/> where status != 9
     </select>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="Long">
         select
         <include refid="Base_Column_List"/>
-        from banner where status != 9 AND id = #{id}
+        from <include refid="banner"/> where status != 9 AND id = #{id}
     </select>
 
     <insert id="insertSelective" parameterType="com.conan.fashionclassbook.pojo.Banner">
-        insert into banner
+        insert into <include refid="banner"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -88,11 +92,11 @@
     <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from banner where id = #{id}
+        from <include refid="banner"/> where id = #{id}
     </select>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.conan.fashionclassbook.pojo.Banner">
-        update banner
+        update <include refid="banner"/>
         <set>
             <if test="title != null">
                 url = #{title,jdbcType=VARCHAR},
@@ -120,7 +124,7 @@
     </update>
 
     <update id="changeStatusById" parameterType="map">
-    update banner set `status` = #{status} where id = #{id}
+    update <include refid="banner"/> set `status` = #{status} where id = #{id}
   </update>
 
 </mapper>

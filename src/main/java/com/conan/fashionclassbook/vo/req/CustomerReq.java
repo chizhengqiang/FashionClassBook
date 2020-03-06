@@ -18,6 +18,7 @@ public class CustomerReq {
     private String nickname;
     private String username;
     private String password;
+    private String gender;
     private String telephone;
     private String uuid;
     private String headImg;

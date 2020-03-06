@@ -12,6 +12,7 @@ public class CustomerResp {
     private String username;
     private String password;
     private String telephone;
+    private String gender;
     private String uuid;
     private String headImg;
     private String email;

@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/fashion_class_book?useUnicode=true&characterEncoding=utf-8&serveTimezone=UTC
+    url: jdbc:mysql://39.97.172.203:3306/fashion_class_book?useUnicode=true&characterEncoding=utf-8&serveTimezone=UTC
     username: root
     password: kndefems
     tomcat:

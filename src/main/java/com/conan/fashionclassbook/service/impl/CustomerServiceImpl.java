@@ -107,4 +107,9 @@ public class CustomerServiceImpl implements ICustomerService {
         }
         return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
     }
+
+    @Override
+    public ServerResponse<CustomerResp> findAll(CustomerResp customerResp, Integer page, Integer size) {
+        return null;
+    }
 }

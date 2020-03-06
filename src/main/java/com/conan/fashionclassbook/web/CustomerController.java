@@ -18,10 +18,16 @@ public class CustomerController {
     @Autowired
     private ICustomerService customerService;
 
+    @GetMapping("/customers/{page}/{size}")
+    public ServerResponse<CustomerResp> findAll(@RequestParam("customerResp") CustomerResp customerResp,
+                                                @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
+        ServerResponse<CustomerResp> response = customerService.findAll(customerResp, page, size);
+        return response;
+    }
+
     @GetMapping("/customers/{id}")
     @ApiOperation("获取一个用户")
-    public ServerResponse<CustomerResp> getById(@PathVariable @NotNull Long id)
-             {
+    public ServerResponse<CustomerResp> getById(@PathVariable @NotNull Long id) {
         ServerResponse<CustomerResp> response = customerService.getById(id);
         return response;
     }
@@ -34,7 +40,7 @@ public class CustomerController {
      */
     @DeleteMapping("/customers/{id}")
     @ApiOperation("删除一个用户")
-    public ServerResponse<String> deleteById(@PathVariable @NotNull Long id)  {
+    public ServerResponse<String> deleteById(@PathVariable @NotNull Long id) {
         ServerResponse<String> response = customerService.deleteById(id);
         return response;
     }

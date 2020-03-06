@@ -13,4 +13,6 @@ public interface ICustomerService {
     ServerResponse<CustomerResp> getById(Long id);
 
     ServerResponse<String> deleteById(Long id);
+
+    ServerResponse<CustomerResp> findAll(CustomerResp customerResp, Integer page, Integer size);
 }
