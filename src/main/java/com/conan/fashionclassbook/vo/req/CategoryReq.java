@@ -19,17 +19,17 @@ public class CategoryReq {
     private Date createTime;
     private Date lastTime;
 
-    public ServerResponse<String> validate(Boolean isExit) {
+    public String validate(Boolean isExit) {
         if (isExit && id == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.ID_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Category.ID_CANNOT_BE_EMPTY;
         }
         if (!isExit && StringUtils.isEmpty(name)) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.NAME_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Category.NAME_CANNOT_BE_EMPTY;
         }
         if (!isExit && parentId == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Category.PARENT_ID_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Category.PARENT_ID_CANNOT_BE_EMPTY;
         }
-        return ServerResponse.createBySuccess();
+        return null;
     }
 
     public Category createCategory() {

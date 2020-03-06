@@ -67,7 +67,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     @Transactional
     public ServerResponse<String> register(CustomerReq req)  {
-        req.validate(false);
+        String errorMsg = req.validate(false);
+        if(errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
+        }
         Customer customer = req.createCustomer();
         int resultCount = customerMapper.insertSelective(customer);
         if (resultCount > 0) {

@@ -28,26 +28,26 @@ public class GoodsReq {
     /**
      * @param isEdit true 编辑
      */
-    public ServerResponse<String> validate(Boolean isEdit) {
+    public String validate(Boolean isEdit) {
         if (isEdit && id == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.ID_CANNOT_BE_EMPTY;
         }
         if (!isEdit && (StringUtils.isEmpty(name))) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.NAME_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.NAME_CANNOT_BE_EMPTY;
         }
         if (!isEdit && StringUtils.isEmpty(coverImg)) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.COVER_IMG_CANNOT_BE_EMPTY;
         }
         if (!isEdit && categoryId == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.CATEGORY_ID_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.CATEGORY_ID_CANNOT_BE_EMPTY;
         }
         if (!isEdit && price == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.PRICE_CANNOT_BE_EMPTY;
         }
         if (!isEdit && flag == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Goods.FLAG_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Goods.FLAG_CANNOT_BE_EMPTY;
         }
-        return ServerResponse.createBySuccess();
+        return null;
     }
 
     public Goods createGoods() {

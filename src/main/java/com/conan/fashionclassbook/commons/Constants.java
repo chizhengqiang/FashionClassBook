@@ -20,7 +20,7 @@ public class Constants {
         }
     }
 
-    public static class Files{
+    public static class Files {
         public static final String CAN_NOT_FIND_RECORD = "上传文件不能为空";
         public static final String UPLOAD_SUCCESS = "上传文件成功";
         public static final String UPLOAD_FAIR = "上传文件失败";
@@ -35,6 +35,11 @@ public class Constants {
         public static final String REQUEST_PARAM_ERROR = "请求参数错误";
         public static final String CAN_NOT_FIND_RECORD = "找不到数据记录";
         public static final String CAN_NOT_FIND_BANNER_RECORD = "该记录不存在";
+
+        public static class Banner {
+            public static final String ID_CANNOT_BE_EMPTY = "轮播图主键ID不能为空";
+            public static final String URL_CANNOT_BE_EMPTY = "轮播图地址不能为空";
+        }
 
         /**
          * 用户

@@ -1,7 +1,6 @@
 package com.conan.fashionclassbook.vo.req;
 
 import com.conan.fashionclassbook.commons.Constants;
-import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.utils.MD5Util;
@@ -32,20 +31,20 @@ public class CustomerReq {
     private Date createTime;
     private Date lastTime;
 
-    public ServerResponse<String> validate(boolean isExit) {
+    public String validate(boolean isExit) {
         if (isExit && id == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.ID_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Customer.ID_CANNOT_BE_EMPTY;
         }
         if (!isExit && StringUtils.isBlank(nickname)) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EMPTY;
         }
         if (!isExit && StringUtils.isBlank(password)) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.PASSWORD_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Customer.PASSWORD_CANNOT_BE_EMPTY;
         }
         if (!isExit && type == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY);
+            return Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY;
         }
-        return ServerResponse.createBySuccess();
+        return null;
     }
 
     public Customer createCustomer() {

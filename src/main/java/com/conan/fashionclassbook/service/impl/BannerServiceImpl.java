@@ -69,8 +69,9 @@ public class BannerServiceImpl implements IBannerService {
     @Override
     @Transactional
     public ServerResponse<String> createBanner(BannerReq request) {
-        if (!request.createValidate()) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        String errorMsg = request.validate(false);
+        if (errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
         }
         int result = bannerMapper.insertSelective(request.createBanner());
         if (result > 0) {
@@ -84,13 +85,13 @@ public class BannerServiceImpl implements IBannerService {
      *
      * @param req
      * @return
-     * @throws FCBException
      */
     @Override
     @Transactional
     public ServerResponse<String> updateBanner(BannerReq req) {
-        if (!req.updateValidate()) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        String errorMsg = req.validate(true);
+        if (errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
         }
         int result = bannerMapper.updateByPrimaryKeySelective(req.updateBanner());
         if (result > 0) {
@@ -102,7 +103,7 @@ public class BannerServiceImpl implements IBannerService {
     /**
      * @param id
      * @return
-     * @throws FCBException
+     * @throws
      */
     @Override
     @Transactional
@@ -120,7 +121,7 @@ public class BannerServiceImpl implements IBannerService {
 
     @Override
     @Transactional
-    public ServerResponse<String> deleteByIds(List<Long> ids){
+    public ServerResponse<String> deleteByIds(List<Long> ids) {
         // TODO 删除选中
         return null;
     }
