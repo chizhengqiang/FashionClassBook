@@ -2,6 +2,7 @@ package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
+import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.service.ICustomerService;
 import com.conan.fashionclassbook.vo.req.CustomerReq;
 import io.swagger.annotations.Api;
@@ -17,8 +18,8 @@ public class LoginController {
 
     @Autowired
     ICustomerService customerService;
-    @Autowired
-    RedisTemplate redisTemplate;
+//    @Autowired
+//    RedisTemplate redisTemplate;
 
     /**
      * 用户登陆
@@ -29,9 +30,9 @@ public class LoginController {
      */
     @GetMapping("/login")
     @ApiOperation("用户登陆接口")
-    public ServerResponse<String> login(@RequestParam(value = "nickname") String nickname,
-                                        @RequestParam(value = "password") String password) {
-        ServerResponse<String> response = customerService.login(nickname, password);
+    public ServerResponse<Customer> login(@RequestParam(value = "nickname") String nickname,
+                                          @RequestParam(value = "password") String password) {
+        ServerResponse<Customer> response = customerService.login(nickname, password);
         return response;
     }
 
@@ -58,7 +59,7 @@ public class LoginController {
     @ApiOperation("用户退出接口")
     public ServerResponse<String> logout(String token) {
         //清除token
-        redisTemplate.delete(token);
+//        redisTemplate.delete(token);
         return ServerResponse.createBySuccessMessage(Constants.SuccessMsg.LOGOUT_SUCCESS);
     }
 }

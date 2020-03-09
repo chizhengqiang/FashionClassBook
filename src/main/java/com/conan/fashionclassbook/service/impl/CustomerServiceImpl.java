@@ -27,8 +27,8 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+//    @Autowired
+//    private RedisTemplate redisTemplate;
 
     /**
      * 登陆
@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements ICustomerService {
      * @
      */
     @Override
-    public ServerResponse<String> login(String nickname, String password)  {
+    public ServerResponse<Customer> login(String nickname, String password)  {
         int resultCount = customerMapper.getCountByNickname(nickname);
         if (resultCount <= 0) {
             return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
@@ -53,8 +53,8 @@ public class CustomerServiceImpl implements ICustomerService {
         }
         String token = UUIDUtil.getUUID32();
         customer.setPassword(StringUtils.EMPTY);
-        redisTemplate.opsForValue().set(token, customer, 1, TimeUnit.HOURS);
-        return ServerResponse.createBySuccess(Constants.SuccessMsg.LOGIN_SUCCESS, token);
+//        redisTemplate.opsForValue().set(token, customer, 1, TimeUnit.HOURS);
+        return ServerResponse.createBySuccess(Constants.SuccessMsg.LOGIN_SUCCESS, customer);
     }
 
     /**
