@@ -19,7 +19,7 @@
     <sql id="goods">fcb_goods</sql>
 
     <sql id="Base_Column_List">
-        id, name, cover_img, category_id, `price`, `discount`, `desc`, `flag`, `status`, create_time, last_time
+        id, `name`, cover_img, category_id, `price`, `discount`, `desc`, `flag`, `status`, create_time, last_time
     </sql>
 
     <select id="findAll" resultMap="BaseResultMap">

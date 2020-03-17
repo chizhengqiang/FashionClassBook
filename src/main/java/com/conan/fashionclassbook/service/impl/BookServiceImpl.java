@@ -1,13 +1,16 @@
 package com.conan.fashionclassbook.service.impl;
 
+import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.enums.StatusEnum;
 import com.conan.fashionclassbook.dao.BookMapper;
 import com.conan.fashionclassbook.pojo.Book;
 import com.conan.fashionclassbook.service.IBookService;
+import com.conan.fashionclassbook.vo.req.BookReq;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +42,9 @@ public class BookServiceImpl implements IBookService {
         }
         int resultCount = bookMapper.changeStatusById(StatusEnum.DELETE_STATUS.getCode(), id);
         if (resultCount <= 0) {
-            return ServerResponse.createByErrorMessage("删除失败");
+            return ServerResponse.createByErrorMessage(Constants.CommonsMsg.DeleteStatusMsg.FAIR);
         }
-        return ServerResponse.createBySuccessMessage("删除成功");
+        return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.DeleteStatusMsg.SUCCESS);
     }
 
     /**
@@ -58,33 +61,45 @@ public class BookServiceImpl implements IBookService {
     /**
      * 增加
      *
-     * @param book
+     * @param req
      * @return
      */
     @Override
     @Transactional
-    public ServerResponse<String> insert(Book book) {
+    public ServerResponse<String> insert(BookReq req) {
+        String errorMsg = req.validate(false);
+        if(errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
+        }
+        Book book = new Book();
+        BeanUtils.copyProperties(req, book);
         int resultCount = bookMapper.insertSelective(book);
         if (resultCount <= 0) {
-            return ServerResponse.createByErrorMessage("添加失败");
+            return ServerResponse.createByErrorMessage(Constants.CommonsMsg.InsertStatusMsg.FAIR);
         }
-        return ServerResponse.createBySuccessMessage("添加成功");
+        return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.InsertStatusMsg.SUCCESS);
     }
 
     /**
      * 修改
      *
-     * @param book
+     * @param req
      * @return
      */
     @Override
     @Transactional
-    public ServerResponse<String> update(Book book) {
+    public ServerResponse<String> update(BookReq req) {
+        String errorMsg = req.validate(true);
+        if(errorMsg != null) {
+            return ServerResponse.createByErrorMessage(errorMsg);
+        }
+        Book book = new Book();
+        BeanUtils.copyProperties(req, book);
         int resultCount = bookMapper.updateByPrimaryKeySelective(book);
         if (resultCount <= 0) {
-            return ServerResponse.createByErrorMessage("修改失败");
+            return ServerResponse.createByErrorMessage(Constants.CommonsMsg.UpdateStatusMsg.FAIR);
         }
-        return ServerResponse.createBySuccessMessage("修改成功");
+        return ServerResponse.createBySuccessMessage(Constants.CommonsMsg.UpdateStatusMsg.SUCCESS);
     }
 
     /**

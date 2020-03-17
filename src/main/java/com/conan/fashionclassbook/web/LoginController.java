@@ -8,8 +8,8 @@ import com.conan.fashionclassbook.vo.req.CustomerReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
 
 @CrossOrigin
 @RestController
@@ -62,4 +62,5 @@ public class LoginController {
 //        redisTemplate.delete(token);
         return ServerResponse.createBySuccessMessage(Constants.SuccessMsg.LOGOUT_SUCCESS);
     }
+
 }

@@ -2,8 +2,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.97.172.203:3306/fashion_class_book?useUnicode=true&characterEncoding=utf-8&serveTimezone=UTC
-    username: root
+    url: jdbc:mysql://localhost:3306/fashion_class_book?useUnicode=true&characterEncoding=utf-8&serveTimezone=UTC
+    username: fcb
     password: kndefems
     tomcat:
       max-active: 4
@@ -18,7 +18,7 @@ spring:
 
 # port
 server:
-  port: 8080
+  port: 8081
 
 # 打印sql
 logging:
@@ -41,7 +41,19 @@ upload:
     - image/bmp
     - image/gif
     -
-
+    # 优雅关闭springboot项目
+management:
+  endpoint:
+    shutdown:
+      enabled: true  #启用shutdown
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /fcb # 自定义管理端点的前缀(保证安全)
+  server:
+    port: 12888
+    address: 127.0.0.1 #
 
 mybatis:
   typeAliasesPackage: com.conan.fashionclassbook.pojo

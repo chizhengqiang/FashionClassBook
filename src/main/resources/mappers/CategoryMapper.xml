@@ -15,7 +15,7 @@
     <sql id="category">fcb_category</sql>
 
     <sql id="Base_Column_List">
-        id, name, parent_id, `desc`, `status`, create_time, last_time
+        id, `name`, parent_id, `desc`, `status`, create_time, last_time
     </sql>
 
     <select id="findAll" resultMap="BaseResultMap">
