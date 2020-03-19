@@ -81,11 +81,11 @@ public class Constants {
          */
         public static class Book {
             public static final String ID_CANNOT_BE_EMPTY = "纪念册Id不能为空";
-            public static final String USERID_CANNOT_BE_EMPTY = "纪念册用户不能为空";
+            public static final String CUSTOMERID_CANNOT_BE_EMPTY = "纪念册用户不能为空";
             public static final String NAME_CANNOT_BE_EMPTY = "纪念册名称不能为空";
             public static final String COVER_IMG_CANNOT_BE_EMPTY = "纪念册封面图不能为空";
-            public static final String SCHOOL_CANNOT_BE_EMPTY = "纪念册价格不能为空";
-            public static final String CLASS_CANNOT_BE_EMPTY = "纪念册是否打折不能为空";
+            public static final String SCHOOL_CANNOT_BE_EMPTY = "纪念册学校不能为空";
+            public static final String CLASS_CANNOT_BE_EMPTY = "纪念册班级不能为空";
             public static final String CAN_NOT_FIND_RECORD = "该纪念册记录不存在";
         }
     }

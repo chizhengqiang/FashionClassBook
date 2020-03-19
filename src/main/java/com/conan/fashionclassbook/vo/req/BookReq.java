@@ -10,7 +10,7 @@ import java.util.Date;
 public class BookReq {
 
     private Long id;
-    private Long userId; //用户Id
+    private Long customerId; //用户Id
     private String name;//名称
     private String coverImg; //图片
     private String school;
@@ -29,8 +29,8 @@ public class BookReq {
         if(edit && id == null) {
             return Constants.ErrorMsg.Book.ID_CANNOT_BE_EMPTY;
         }
-        if(!edit && userId == null) {
-            return Constants.ErrorMsg.Book.USERID_CANNOT_BE_EMPTY;
+        if(!edit && customerId == null) {
+            return Constants.ErrorMsg.Book.CUSTOMERID_CANNOT_BE_EMPTY;
         }
         if(!edit && StringUtils.isBlank(name)) {
             return Constants.ErrorMsg.Book.NAME_CANNOT_BE_EMPTY;

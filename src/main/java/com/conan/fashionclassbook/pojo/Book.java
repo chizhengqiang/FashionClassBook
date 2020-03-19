@@ -11,7 +11,7 @@ import java.util.Date;
 public class Book {
 
     private Long id;
-    private Long userId; //用户Id
+    private Long customerId; //用户Id
     private String name;//名称
     private String coverImg; //图片
     private String school;

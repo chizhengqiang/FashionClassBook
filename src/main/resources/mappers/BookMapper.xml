@@ -5,7 +5,7 @@
     <resultMap id="BaseResultMap" type="com.conan.fashionclassbook.pojo.Book">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="customer_id" property="customerId" jdbcType="INTEGER"/>
         <result column="cover_img" property="coverImg" jdbcType="VARCHAR"/>
         <result column="school" property="school" jdbcType="VARCHAR"/>
         <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
@@ -15,7 +15,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, `name`, `user_id`, `cover_img`, school, clazz, `status`, create_time, last_time
+        id, `name`, `customer_id`, `cover_img`, school, clazz, `status`, create_time, last_time
     </sql>
 
     <sql id="tableName">
@@ -51,8 +51,8 @@
             <if test="coverImg != null">
                 `cover_img`,
             </if>
-            <if test="userId != null">
-                `user_id`,
+            <if test="customerId != null">
+                `customer_id`,
             </if>
             <if test="school != null">
                 `school`,
@@ -80,8 +80,8 @@
             <if test="coverImg != null">
                 #{coverImg,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
             </if>
             <if test="school != null">
                 #{school,jdbcType=VARCHAR},
@@ -116,8 +116,8 @@
             <if test="name != null">
                 `name` = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
-                `user_id` = #{userId,jdbcType=INTEGER},
+            <if test="customerId != null">
+                `customer_id` = #{customerId,jdbcType=INTEGER},
             </if>
             <if test="coverImg != null">
                 `cover_img` = #{coverImg,jdbcType=VARCHAR},
