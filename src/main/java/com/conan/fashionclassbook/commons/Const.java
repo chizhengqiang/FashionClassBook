@@ -12,4 +12,15 @@ public class Const {
 
     public static final String FILE_PATH_URL = "multipartfile.filePath";
 
+    /**
+     * swagger配置
+     */
+    public static class Swagger {
+        public static String ENABLE = "swagger.enable";
+        public static String TITLE = "swagger.title";
+        public static String DESCRIPTION = "swagger.description";
+        public static String TERMSOFSERVICEURL = "swagger.termsOfServiceUrl";
+        public static String VERSION = "swagger.version";
+    }
+
 }

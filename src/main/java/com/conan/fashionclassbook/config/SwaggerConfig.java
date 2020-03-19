@@ -1,5 +1,7 @@
 package com.conan.fashionclassbook.config;
 
+import com.conan.fashionclassbook.commons.Const;
+import com.conan.fashionclassbook.utils.PropertiesUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,9 +16,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .enable(Boolean.valueOf(PropertiesUtil.getProperty(Const.Swagger.ENABLE)))
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.conan.fashionclassbook.web"))
@@ -26,11 +30,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("青春纪念册")
-                .description("Spring Boot中使用Swagger2构建RESTful APIs")
-                .termsOfServiceUrl("http://fashion_class_book.com/")
-                .contact("程序猿Conan")
-                .version("1.0")
+                .title(PropertiesUtil.getProperty(Const.Swagger.TITLE))
+                .description(Const.Swagger.DESCRIPTION)
+                .termsOfServiceUrl(Const.Swagger.TERMSOFSERVICEURL)
+                .version(Const.Swagger.VERSION)
                 .build();
     }
 }
