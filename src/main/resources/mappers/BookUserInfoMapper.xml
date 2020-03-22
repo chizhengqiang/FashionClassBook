@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.conan.fashionclassbook.mapper.BookUserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.conan.fashionclassbook.pojo.BookUserInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="book_id" property="bookId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+        <result column="signature" property="signature" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="CHAR"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="voice" property="voice" jdbcType="VARCHAR"/>
+        <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
+        <result column="weibo" property="weibo" jdbcType="VARCHAR"/>
+        <result column="blog" property="blog" jdbcType="VARCHAR"/>
+        <result column="constellation" property="constellation" jdbcType="VARCHAR"/>
+        <result column="zodiac" property="zodiac" jdbcType="VARCHAR"/>
+        <result column="dream" property="dream" jdbcType="VARCHAR"/>
+        <result column="profile" property="profile" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="favorite_colors" property="favoriteColors" jdbcType="VARCHAR"/>
+        <result column="people_of_admiration" property="peopleOfAdmiration" jdbcType="VARCHAR"/>
+        <result column="favorite_singer" property="favoriteSinger" jdbcType="VARCHAR"/>
+        <result column="mantra" property="mantra" jdbcType="VARCHAR"/>
+        <result column="favorite_sport" property="favoriteSport" jdbcType="VARCHAR"/>
+        <result column="favorite_movie" property="favoriteMovie" jdbcType="VARCHAR"/>
+        <result column="favorite_people" property="favoritePeople" jdbcType="VARCHAR"/>
+        <result column="favorite_novels" property="favoriteNovels" jdbcType="VARCHAR"/>
+        <result column="favorite_poetry_author" property="favoritePoetryAuthor" jdbcType="VARCHAR"/>
+        <result column="favorite_animals" property="favoriteAnimals" jdbcType="VARCHAR"/>
+        <result column="feared_animals" property="fearedAnimals" jdbcType="VARCHAR"/>
+        <result column="moniker" property="moniker" jdbcType="VARCHAR"/>
+        <result column="taboo" property="taboo" jdbcType="VARCHAR"/>
+        <result column="wish" property="wish" jdbcType="VARCHAR"/>
+        <result column="guest_book" property="guestBook" jdbcType="VARCHAR"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="last_time" property="lastTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, book_id, user_id, username, head_img, signature, gender, birthday, voice, telephone, 
+    email, wechat, weibo, blog, constellation, zodiac, dream, profile, address, favorite_colors, 
+    people_of_admiration, favorite_singer, mantra, favorite_sport, favorite_movie, favorite_people, 
+    favorite_novels, favorite_poetry_author, favorite_animals, feared_animals, moniker, 
+    taboo, wish, guest_book, details, status, create_time, last_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from fcb_book_user_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fcb_book_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.conan.fashionclassbook.pojo.BookUserInfo">
+    insert into fcb_book_user_info (id, book_id, user_id, 
+      username, head_img, signature, 
+      gender, birthday, voice, 
+      telephone, email, wechat, 
+      weibo, blog, constellation, 
+      zodiac, dream, profile, 
+      address, favorite_colors, people_of_admiration, 
+      favorite_singer, mantra, favorite_sport, 
+      favorite_movie, favorite_people, favorite_novels, 
+      favorite_poetry_author, favorite_animals, 
+      feared_animals, moniker, taboo, 
+      wish, guest_book, details, 
+      status, create_time, last_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP}, #{voice,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{weibo,jdbcType=VARCHAR}, #{blog,jdbcType=VARCHAR}, #{constellation,jdbcType=VARCHAR}, 
+      #{zodiac,jdbcType=VARCHAR}, #{dream,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{favoriteColors,jdbcType=VARCHAR}, #{peopleOfAdmiration,jdbcType=VARCHAR}, 
+      #{favoriteSinger,jdbcType=VARCHAR}, #{mantra,jdbcType=VARCHAR}, #{favoriteSport,jdbcType=VARCHAR}, 
+      #{favoriteMovie,jdbcType=VARCHAR}, #{favoritePeople,jdbcType=VARCHAR}, #{favoriteNovels,jdbcType=VARCHAR}, 
+      #{favoritePoetryAuthor,jdbcType=VARCHAR}, #{favoriteAnimals,jdbcType=VARCHAR}, 
+      #{fearedAnimals,jdbcType=VARCHAR}, #{moniker,jdbcType=VARCHAR}, #{taboo,jdbcType=VARCHAR}, 
+      #{wish,jdbcType=VARCHAR}, #{guestBook,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{lastTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.conan.fashionclassbook.pojo.BookUserInfo">
+        insert into fcb_book_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="bookId != null">
+                book_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+            <if test="signature != null">
+                signature,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="voice != null">
+                voice,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="wechat != null">
+                wechat,
+            </if>
+            <if test="weibo != null">
+                weibo,
+            </if>
+            <if test="blog != null">
+                blog,
+            </if>
+            <if test="constellation != null">
+                constellation,
+            </if>
+            <if test="zodiac != null">
+                zodiac,
+            </if>
+            <if test="dream != null">
+                dream,
+            </if>
+            <if test="profile != null">
+                profile,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="favoriteColors != null">
+                favorite_colors,
+            </if>
+            <if test="peopleOfAdmiration != null">
+                people_of_admiration,
+            </if>
+            <if test="favoriteSinger != null">
+                favorite_singer,
+            </if>
+            <if test="mantra != null">
+                mantra,
+            </if>
+            <if test="favoriteSport != null">
+                favorite_sport,
+            </if>
+            <if test="favoriteMovie != null">
+                favorite_movie,
+            </if>
+            <if test="favoritePeople != null">
+                favorite_people,
+            </if>
+            <if test="favoriteNovels != null">
+                favorite_novels,
+            </if>
+            <if test="favoritePoetryAuthor != null">
+                favorite_poetry_author,
+            </if>
+            <if test="favoriteAnimals != null">
+                favorite_animals,
+            </if>
+            <if test="fearedAnimals != null">
+                feared_animals,
+            </if>
+            <if test="moniker != null">
+                moniker,
+            </if>
+            <if test="taboo != null">
+                taboo,
+            </if>
+            <if test="wish != null">
+                wish,
+            </if>
+            <if test="guestBook != null">
+                guest_book,
+            </if>
+            <if test="details != null">
+                details,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastTime != null">
+                last_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="bookId != null">
+                #{bookId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="voice != null">
+                #{voice,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat != null">
+                #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="weibo != null">
+                #{weibo,jdbcType=VARCHAR},
+            </if>
+            <if test="blog != null">
+                #{blog,jdbcType=VARCHAR},
+            </if>
+            <if test="constellation != null">
+                #{constellation,jdbcType=VARCHAR},
+            </if>
+            <if test="zodiac != null">
+                #{zodiac,jdbcType=VARCHAR},
+            </if>
+            <if test="dream != null">
+                #{dream,jdbcType=VARCHAR},
+            </if>
+            <if test="profile != null">
+                #{profile,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteColors != null">
+                #{favoriteColors,jdbcType=VARCHAR},
+            </if>
+            <if test="peopleOfAdmiration != null">
+                #{peopleOfAdmiration,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteSinger != null">
+                #{favoriteSinger,jdbcType=VARCHAR},
+            </if>
+            <if test="mantra != null">
+                #{mantra,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteSport != null">
+                #{favoriteSport,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteMovie != null">
+                #{favoriteMovie,jdbcType=VARCHAR},
+            </if>
+            <if test="favoritePeople != null">
+                #{favoritePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteNovels != null">
+                #{favoriteNovels,jdbcType=VARCHAR},
+            </if>
+            <if test="favoritePoetryAuthor != null">
+                #{favoritePoetryAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteAnimals != null">
+                #{favoriteAnimals,jdbcType=VARCHAR},
+            </if>
+            <if test="fearedAnimals != null">
+                #{fearedAnimals,jdbcType=VARCHAR},
+            </if>
+            <if test="moniker != null">
+                #{moniker,jdbcType=VARCHAR},
+            </if>
+            <if test="taboo != null">
+                #{taboo,jdbcType=VARCHAR},
+            </if>
+            <if test="wish != null">
+                #{wish,jdbcType=VARCHAR},
+            </if>
+            <if test="guestBook != null">
+                #{guestBook,jdbcType=VARCHAR},
+            </if>
+            <if test="details != null">
+                #{details,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTime != null">
+                #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.conan.fashionclassbook.pojo.BookUserInfo">
+        update fcb_book_user_info
+        <set>
+            <if test="bookId != null">
+                book_id = #{bookId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="voice != null">
+                voice = #{voice,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="wechat != null">
+                wechat = #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="weibo != null">
+                weibo = #{weibo,jdbcType=VARCHAR},
+            </if>
+            <if test="blog != null">
+                blog = #{blog,jdbcType=VARCHAR},
+            </if>
+            <if test="constellation != null">
+                constellation = #{constellation,jdbcType=VARCHAR},
+            </if>
+            <if test="zodiac != null">
+                zodiac = #{zodiac,jdbcType=VARCHAR},
+            </if>
+            <if test="dream != null">
+                dream = #{dream,jdbcType=VARCHAR},
+            </if>
+            <if test="profile != null">
+                profile = #{profile,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteColors != null">
+                favorite_colors = #{favoriteColors,jdbcType=VARCHAR},
+            </if>
+            <if test="peopleOfAdmiration != null">
+                people_of_admiration = #{peopleOfAdmiration,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteSinger != null">
+                favorite_singer = #{favoriteSinger,jdbcType=VARCHAR},
+            </if>
+            <if test="mantra != null">
+                mantra = #{mantra,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteSport != null">
+                favorite_sport = #{favoriteSport,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteMovie != null">
+                favorite_movie = #{favoriteMovie,jdbcType=VARCHAR},
+            </if>
+            <if test="favoritePeople != null">
+                favorite_people = #{favoritePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteNovels != null">
+                favorite_novels = #{favoriteNovels,jdbcType=VARCHAR},
+            </if>
+            <if test="favoritePoetryAuthor != null">
+                favorite_poetry_author = #{favoritePoetryAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="favoriteAnimals != null">
+                favorite_animals = #{favoriteAnimals,jdbcType=VARCHAR},
+            </if>
+            <if test="fearedAnimals != null">
+                feared_animals = #{fearedAnimals,jdbcType=VARCHAR},
+            </if>
+            <if test="moniker != null">
+                moniker = #{moniker,jdbcType=VARCHAR},
+            </if>
+            <if test="taboo != null">
+                taboo = #{taboo,jdbcType=VARCHAR},
+            </if>
+            <if test="wish != null">
+                wish = #{wish,jdbcType=VARCHAR},
+            </if>
+            <if test="guestBook != null">
+                guest_book = #{guestBook,jdbcType=VARCHAR},
+            </if>
+            <if test="details != null">
+                details = #{details,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastTime != null">
+                last_time = #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.conan.fashionclassbook.pojo.BookUserInfo">
+    update fcb_book_user_info
+    set book_id = #{bookId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      voice = #{voice,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      weibo = #{weibo,jdbcType=VARCHAR},
+      blog = #{blog,jdbcType=VARCHAR},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      zodiac = #{zodiac,jdbcType=VARCHAR},
+      dream = #{dream,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      favorite_colors = #{favoriteColors,jdbcType=VARCHAR},
+      people_of_admiration = #{peopleOfAdmiration,jdbcType=VARCHAR},
+      favorite_singer = #{favoriteSinger,jdbcType=VARCHAR},
+      mantra = #{mantra,jdbcType=VARCHAR},
+      favorite_sport = #{favoriteSport,jdbcType=VARCHAR},
+      favorite_movie = #{favoriteMovie,jdbcType=VARCHAR},
+      favorite_people = #{favoritePeople,jdbcType=VARCHAR},
+      favorite_novels = #{favoriteNovels,jdbcType=VARCHAR},
+      favorite_poetry_author = #{favoritePoetryAuthor,jdbcType=VARCHAR},
+      favorite_animals = #{favoriteAnimals,jdbcType=VARCHAR},
+      feared_animals = #{fearedAnimals,jdbcType=VARCHAR},
+      moniker = #{moniker,jdbcType=VARCHAR},
+      taboo = #{taboo,jdbcType=VARCHAR},
+      wish = #{wish,jdbcType=VARCHAR},
+      guest_book = #{guestBook,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

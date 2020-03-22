@@ -10,14 +10,15 @@ import com.conan.fashionclassbook.utils.MD5Util;
 import com.conan.fashionclassbook.utils.UUIDUtil;
 import com.conan.fashionclassbook.vo.req.CustomerReq;
 import com.conan.fashionclassbook.vo.resp.CustomerResp;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -39,7 +40,7 @@ public class CustomerServiceImpl implements ICustomerService {
      * @
      */
     @Override
-    public ServerResponse<Customer> login(String nickname, String password)  {
+    public ServerResponse<Customer> login(String nickname, String password) {
         int resultCount = customerMapper.getCountByNickname(nickname);
         if (resultCount <= 0) {
             return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
@@ -66,9 +67,9 @@ public class CustomerServiceImpl implements ICustomerService {
      */
     @Override
     @Transactional
-    public ServerResponse<String> register(CustomerReq req)  {
+    public ServerResponse<String> register(CustomerReq req) {
         String errorMsg = req.validate(false);
-        if(errorMsg != null) {
+        if (errorMsg != null) {
             return ServerResponse.createByErrorMessage(errorMsg);
         }
         Customer customer = req.createCustomer();
@@ -87,7 +88,7 @@ public class CustomerServiceImpl implements ICustomerService {
      * @
      */
     @Override
-    public ServerResponse<CustomerResp> getById(Long id)  {
+    public ServerResponse<CustomerResp> getById(Long id) {
         Customer customer = customerMapper.getById(id);
         if (customer == null) {
             return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
@@ -99,7 +100,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     @Transactional
-    public ServerResponse<String> deleteById(Long id)  {
+    public ServerResponse<String> deleteById(Long id) {
         Customer customer = customerMapper.getById(id);
         if (customer == null) {
             return ServerResponse.createByErrorMessage(Constants.ErrorMsg.Customer.NICKNAME_CANNOT_BE_EXIST);
@@ -112,7 +113,19 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public ServerResponse<CustomerResp> findAll(CustomerResp customerResp, Integer page, Integer size) {
+    public ServerResponse<CustomerResp> findPage(CustomerResp customerResp, Integer page, Integer size) {
         return null;
+    }
+
+    @Override
+    public ServerResponse<List<CustomerResp>> findAll(CustomerResp customerResp) {
+        List<CustomerResp> customerRespList = Lists.newArrayList();
+        List<Customer> customerList = customerMapper.findAll();
+        customerList.stream().forEach(customer -> {
+            CustomerResp resp = new CustomerResp();
+            BeanUtils.copyProperties(customer, resp);
+            customerRespList.add(resp);
+        });
+        return ServerResponse.createBySuccess(customerRespList);
     }
 }

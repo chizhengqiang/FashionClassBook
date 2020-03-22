@@ -4,6 +4,7 @@ import com.conan.fashionclassbook.commons.Constants;
 import com.conan.fashionclassbook.commons.ServerResponse;
 import com.conan.fashionclassbook.dao.BannerMapper;
 import com.conan.fashionclassbook.enums.StatusEnum;
+import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.pojo.Banner;
 import com.conan.fashionclassbook.service.IBannerService;
 import com.conan.fashionclassbook.vo.req.BannerReq;
@@ -64,10 +65,11 @@ public class BannerServiceImpl implements IBannerService {
     }
 
     @Override
-    public ServerResponse<BannerResp> getById(Long id) {
+    public ServerResponse<BannerResp> getById(Long id) throws FCBException {
         Banner banner = bannerMapper.getById(id);
         if (banner == null) {
-            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
+//            return ServerResponse.createByErrorMessage(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
+            throw new FCBException(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
         }
         BannerResp bannerResp = new BannerResp();
         BeanUtils.copyProperties(banner, bannerResp);

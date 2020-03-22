@@ -88,5 +88,11 @@ public class Constants {
             public static final String CLASS_CANNOT_BE_EMPTY = "纪念册班级不能为空";
             public static final String CAN_NOT_FIND_RECORD = "该纪念册记录不存在";
         }
+
+        public static class BookUserInfo {
+            public static final String ID_CANNOT_BE_EMPTY = "纪念册内容Id不能为空";
+            public static final String USERNAME_CANNOT_BE_EMPTY = "姓名不能为空";
+            public static final String USERID_CANNOT_BE_EMPTY = "用户Id不能为空";
+        }
     }
 }

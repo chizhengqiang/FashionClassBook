@@ -41,9 +41,9 @@ public class CustomerReq {
         if (!isExit && StringUtils.isBlank(password)) {
             return Constants.ErrorMsg.Customer.PASSWORD_CANNOT_BE_EMPTY;
         }
-        if (!isExit && type == null) {
-            return Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY;
-        }
+//        if (!isExit && type == null) {
+//            return Constants.ErrorMsg.Customer.TYPE_CANNOT_BE_EMPTY;
+//        }
         return null;
     }
 

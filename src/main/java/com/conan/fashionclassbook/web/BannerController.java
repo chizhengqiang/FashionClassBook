@@ -1,6 +1,7 @@
 package com.conan.fashionclassbook.web;
 
 import com.conan.fashionclassbook.commons.ServerResponse;
+import com.conan.fashionclassbook.exception.FCBException;
 import com.conan.fashionclassbook.service.IBannerService;
 import com.conan.fashionclassbook.vo.req.BannerReq;
 import com.conan.fashionclassbook.vo.resp.BannerResp;
@@ -81,7 +82,7 @@ public class BannerController {
 
     @GetMapping("/banners/{id}")
     @ApiOperation("根据Id获取轮播图接口")
-    public ServerResponse<BannerResp> findById(@PathVariable("id") Long id) {
+    public ServerResponse<BannerResp> findById(@PathVariable("id") Long id) throws FCBException {
         ServerResponse<BannerResp> response = bannerService.getById(id);
         return response;
     }

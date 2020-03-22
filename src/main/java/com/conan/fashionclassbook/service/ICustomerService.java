@@ -5,6 +5,8 @@ import com.conan.fashionclassbook.pojo.Customer;
 import com.conan.fashionclassbook.vo.req.CustomerReq;
 import com.conan.fashionclassbook.vo.resp.CustomerResp;
 
+import java.util.List;
+
 public interface ICustomerService {
 
     ServerResponse<Customer> login(String nickname, String password);
@@ -15,5 +17,7 @@ public interface ICustomerService {
 
     ServerResponse<String> deleteById(Long id);
 
-    ServerResponse<CustomerResp> findAll(CustomerResp customerResp, Integer page, Integer size);
+    ServerResponse<CustomerResp> findPage(CustomerResp customerResp, Integer page, Integer size);
+
+    ServerResponse<List<CustomerResp>> findAll(CustomerResp customerResp);
 }
